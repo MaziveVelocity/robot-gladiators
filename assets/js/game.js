@@ -11,13 +11,6 @@ var playerMoney = 10;
 
 
 console.log(playerName, playerAttack, playerHealth);
-/*
-consolee.log(enemyNames);
-for (var i = 0; i < enemyNames.length; i++){
-    console.log(enemyNames[i]);
-    console.log(i);
-    console.log(enemyNames[i] + " is at " + i + " index")
-}*/
 
 var fight = function(enemyName) {
     
@@ -45,9 +38,10 @@ var fight = function(enemyName) {
             }else{
                 window.alert(playerName + " still has " + playerHealth + " health left.");
             }
+                
         }else if (promptFight === "skip" || promptFight === "SKIP"){
-            var confirmSkip = window.confirm("Are you sure you'd like to quit?");
             
+            var confirmSkip = window.confirm("Are you sure you'd like to quit?");
             if (confirmSkip){
                 window.alert(playerName + " has skip the fight");
                 playerMoney -= 10;
@@ -63,12 +57,38 @@ var fight = function(enemyName) {
     }
 };
 
-for(var i = 0; i < enemyNames.length; i++){
-    if (playerHealth > 0){
-        window.alert("Welcome to Robot Gladiators! " + (i + 1));
-    }    
-    var pickedEnemy = enemyNames[i];
-    enemyHealth = 50;
-    debugger;
-    fight(pickedEnemy);
+var startGame = function(){
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
+
+    for(var i = 0; i < enemyNames.length; i++){
+        if (playerHealth > 0){
+            window.alert("Welcome to Robot Gladiators! " + (i + 1));
+            var pickedEnemy = enemyNames[i];
+            enemyHealth = 50;
+            fight(pickedEnemy);
+        }else{
+            endGame();
+        }
+    }
+    startGame();
 }
+
+var endGame = function(){
+    if (playerHealth > 0){
+        window.alert("The game has now ended. Let's see how you did!");
+    }else{
+        window.alert("You've lost your robot in battle.");
+    }
+
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+
+    if (playAgainConfirm){
+        startGame();
+    }else{
+        window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+    }
+}
+
+startGame();
