@@ -19,7 +19,7 @@ var fight = function(enemyName) {
 
         if (promptFight === "fight" || promptFight === "FIGHT"){
             
-            enemyHealth -= playerAttack;
+            enemyHealth -= Math.max(0, enemyHealth - playerAttack);
             console.log("Enemy Health: " + enemyHealth);
 
             if (enemyHealth <= 0){
@@ -29,7 +29,7 @@ var fight = function(enemyName) {
                 window.alert(enemyName + " still has " + enemyHealth + " health left.");
             }
 
-            playerHealth -= enemyAttack;
+            playerHealth -= Math.max(0, playerHealth - enemyAttack);
             console.log("Player Health: " +  playerHealth);
 
             if (playerHealth <= 0){
@@ -45,7 +45,7 @@ var fight = function(enemyName) {
 
             if (confirmSkip){
                 window.alert(playerName + " has skip the fight");
-                playerMoney -= 10;
+                playerMoney -= Math.max(0, playerMoney - 10);
                 console.log("Player's Money: ",playerMoney);
                 break;
             }else{
@@ -58,6 +58,11 @@ var fight = function(enemyName) {
     }
 };
 
+var randomNumber = function(min, max){
+    var value = Math.floor(Math.random() * (max - min +1)) + min;
+    return value;
+}
+
 var startGame = function(){
     playerHealth = 100;
     playerAttack = 10;
@@ -67,7 +72,7 @@ var startGame = function(){
         if (playerHealth > 0){
             window.alert("Welcome to Robot Gladiators! " + (i + 1));
             var pickedEnemy = enemyNames[i];
-            enemyHealth = 50;
+            enemyHealth = randomNumber();
             fight(pickedEnemy);
             if (playerHealth > 0 && i < enemyNames.length - 1){
                 var storeConfirm = window.confirm("The fight is over, visit the store before the next round?")
