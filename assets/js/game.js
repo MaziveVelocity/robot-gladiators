@@ -37,7 +37,7 @@ var playerInfo = {
 var enemyInfo = [ 
     {
         name: "Roborto",
-        attack: randomNumber(10,14)
+        attack: randomNumber(10,14),
     },
     {
         name: "Amy Android",
@@ -114,15 +114,16 @@ var startGame = function(){
     playerInfo.reset();
 
     for(var i = 0; i < enemyInfo.length; i++){
-        if (playerHealth > 0){
+        if (playerInfo.health > 0){
             var pickedEnemyObject = enemyInfo[i];
             enemyInfo.health = randomNumber(40, 60);
             
             window.alert("Welcome to Robot Gladiators! " + (i + 1));
+            debugger;
             
             fight(pickedEnemyObject);
 
-            if (playerHealth > 0 && i < enemyNames.length - 1){
+            if (playerInfo.health > 0 && i < enemyNames.length - 1){
                 var storeConfirm = window.confirm("The fight is over, visit the store before the next round?")
                 
                 if (storeConfirm){
